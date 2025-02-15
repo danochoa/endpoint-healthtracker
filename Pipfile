@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pyyaml = "~=6.0"
+requests-ratelimiter = "~=0.7"
+requests = "~=2.32"
+schema = "~=0.7"
+tldextract = "~=5.1"
+
+[dev-packages]
+
+[requires]
+python_version = "3.13"
