@@ -21,7 +21,9 @@ This project began as a take-home exercise for a job interview and may not be fu
   - [Steps](#steps)
 - [Availability Calculation](#availability-calculation)
 - [Endpoint Schema](#endpoint-schema)
-- [Debug Logging](#debug-logging)
+- [Logging](#logging)
+  - [Debug Logging](#debug-logging)
+  - [Custom Logging](#custom-logging)
 - [Configuration Parameters](#configuration-parameters)
 - [Assumptions and Limitations](#assumptions-and-limitations)
 - [Future Improvements](#future-improvements)
@@ -137,21 +139,25 @@ Each endpoint in the YAML file should following this schema:
 
 See [sample_endpoints.yaml](sample_endpoints.yaml) for a complete example.
 
-## Debug Logging
+## Logging
+
+### Debug Logging
 
 Debug logging can be enabled by setting the root logger level to `debug` in the provided `config.yaml` before starting the program.
 
-The default logging configuration uses a custom log formatter that creates a pair of standard formatters to control how messages are formatted based on the root logger level and log record level, as outlined in the following table:
+### Custom Logging
+
+The default logging configuration uses a custom log formatter that creates two sub-formatters, `base` and `info`, to control how messages are formatted based on the **root logger level** and **log record level**, as outlined in the following table:
 
 | Root Logger Level | Log Record Level | Formatter |
 | ----------------- | ---------------- | --------- |
-| info (default)    | info             | info      |
-| info (default)    | non-info         | base      |
-| non-info          | all              | base      |
+| info (default)    | info             | `info`    |
+| info (default)    | non-info         | `base`    |
+| non-info          | all              | `base`    |
 
-When the root logger is set to `info` (the default mode), the `info` formatter applies only to info-level records to provide the plain availability status messages logged to the console at the end of each health check cycle. The `base` formatter applies to non-info level messages, providing more context such as timestamps, log levels, logger names, thread names, etc., for debugging and troubleshooting.
+When the root logger is set to `info` (the default mode), the `info` formatter applies only to info-level records to provide the plain availability status messages logged to the console at the end of each health check cycle. And the `base` formatter applies to non-info level messages (debug, warn, error, etc), providing more context such as timestamps, log levels, logger names, thread names, etc., for debugging and troubleshooting.
 
-If the root logger is set to anything other than `info`, the `base` formatter applies to all log records.
+If the root logger is set to anything other than `info`, the `base` formatter applies to all log records, essentially bypassing the `info` formatter.
 
 Both formatters are full formatters from the standard logging module and are fully customizable in `config.yaml`. Additionally, the full logging configuration is exposed in `config.yaml` to allow more advanced customization, such as logging to a file.
 
