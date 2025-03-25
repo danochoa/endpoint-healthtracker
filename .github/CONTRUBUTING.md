@@ -2,7 +2,7 @@
 
 ## Updating environment packages
 
-1. Edit packages in `Pipfile`.
+1. Edit packages in `Pipfile`: `pipenv install <package>`
 1. Lock environment/generate the updated `Pipfile.lock`: `pipenv lock`
 1. Install latest environment from `Pipfile.lock`: `pipenv install --ignore-pipfile`
 1. Commit updated `Pipfile` and `Pipfile.lock`.

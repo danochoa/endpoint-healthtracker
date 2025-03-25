@@ -103,6 +103,7 @@ cd endpoint-healthtracker
 # Install pipenv for deterministic builds
 python3 -m pip install --user pipenv
 # Install the Python modules in the Pipfile
+export PIPENV_VENV_IN_PROJECT=1
 python3 -m pipenv install
 # Activate the virtual environment
 python3 -m pipenv shell
